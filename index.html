@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossiê Avançado: Carolina Maria de Jesus | Literatura e Sociedade</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sacramento&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-quote: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --accent: #dc2626;
+            --accent-hover: #b91c1c;
+            --border: #e2e8f0;
+            --navbar-bg: rgba(220, 38, 38, 0.95);
+            --footer-bg: #0f172a;
+            --footer-text: #94a3b8;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #090d16;
+            --bg-card: #111827;
+            --bg-quote: #1f2937;
+            --text-primary: #f8fafc;
+            --text-secondary: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #ef4444;
+            --accent-hover: #dc2626;
+            --border: #374151;
+            --navbar-bg: rgba(17, 24, 39, 0.95);
+            --footer-bg: #030712;
+            --footer-text: #6b7280;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.8;
+            padding-top: 70px;
+            transition: var(--transition);
+        }
+        
+        /* Barra de Navegação */
+        .navbar {
+            background-color: var(--navbar-bg);
+            backdrop-filter: blur(10px);
+            color: white;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 14px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover { opacity: 1; text-decoration: underline; }
+
+        .theme-toggle {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover { background: rgba(255,255,255,0.25); transform: scale(1.02); }
+
+        /* Hero Header */
+        .hero {
+            background: linear-gradient(to bottom, var(--bg-card), var(--bg-body));
+            padding: 90px 20px 70px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero .tag-categoria {
+            background-color: rgba(220, 38, 38, 0.1);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Sacramento', cursive;
+            font-size: 6rem;
+            margin-bottom: 20px;
+            line-height: 1;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 4rem; }
+            .nav-links { display: none; }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 850px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .conteudo-fluxo {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* Blocos de Artigo */
+        .bloco-artigo {
+            background-color: var(--bg-card);
+            padding: 50px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin-bottom: 45px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        @media (max-width: 600px) {
+            .bloco-artigo { padding: 25px; }
+        }
+
+        .titulo-secao {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 10px;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .subtitulo-secao {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin: 30px 0 15px;
+        }
+
+        p.texto-paragrafo {
+            margin-bottom: 22px;
+            font-size: 1.1rem;
+            text-align: justify;
+            color: var(--text-secondary);
+        }
+
+        /* Citações */
+        .bloco-citacao {
+            background-color: var(--bg-quote);
+            border-left: 4px solid var(--accent);
+            padding: 25px 30px;
+            margin: 35px 0;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            border-radius: 0 12px 12px 0;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        /* Galeria de Fotos */
+        .galeria-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 35px 0;
+        }
+
+        .galeria-card {
+            background: var(--bg-quote);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .galeria-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .galeria-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: var(--transition);
+        }
+
+        .galeria-card:hover img {
+            filter: grayscale(0%);
+        }
+
+        .galeria-legenda {
+            padding: 15px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Questões Simuladas */
+        .questao-container {
+            background: var(--bg-quote);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+        
+        .questao-enunciado {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .questao-alternativas {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .questao-alternativas li {
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .questao-alternativas li:hover {
+            border-color: var(--accent);
+        }
+
+        details {
+            background: var(--bg-card);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        summary {
+            font-weight: 700;
+            color: var(--accent);
+            outline: none;
+        }
+
+        details p {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--border);
+            font-size: 0.95rem;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 0.95rem;
+            border-top: 4px solid var(--accent);
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Navegação -->
+    <nav class="navbar">
+        <div class="navbar-title">📚 Dossiê: Carolina Maria de Jesus</div>
+        <div class="nav-links">
+            <a href="#biografia">Biografia</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#analise">Análise Literária</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+            <span id="themeIcon">🌙</span>
+            <span id="themeText">Modo Escuro</span>
+        </button>
+    </nav>
+
+    <!-- Cabeçalho -->
+    <header class="hero">
+        <span class="tag-categoria">Projeto Escolar Interdisciplinar • Literatura & Sociologia</span>
+        <h1>Carolina Maria de Jesus</h1>
+        <p>A escritora, poeta e multiartista que transformou os diários de sua vivência como catadora de papel na denúncia social mais contundente do Brasil.</p>
+    </header>
+
+    <main class="conteudo-fluxo">
+        
+        <!-- SEÇÃO 1: BIOGRAFIA -->
+        <section class="bloco-artigo" id="biografia">
+            <span class="tag-categoria">Contexto Histórico</span>
+            <h2 class="titulo-secao">A Luta na Favela do Canindé (São Paulo)</h2>
+            <p class="texto-paragrafo">Após a morte de sua mãe, Carolina migrou para São Paulo em 1937. Em 1948, fixou residência na Favela do Canindé, situada às margens do Rio Tietê. Criando sozinha seus três filhos, garantiu o sustento diário trabalhando como catadora de papelão e materiais recicláveis.</p>
+            
+            <p class="texto-paragrafo">À noite, sob a luz precária de lamparinas em seu barraco de madeira e zinco, registrava em cadernos achados no lixo a dura realidade da periferia paulistana: a violência, o racismo estrutural, a falta de saneamento básico e, sobretudo, a fome avassaladora, que ela descrevia como tendo a "cor amarela".</p>
+            
+            <div class="bloco-citacao">
+                "O Brasil precisa ser dirigido por uma pessoa que já passou fome. A fome também é professora."
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: GALERIA DE FOTOS -->
+        <section class="bloco-artigo" id="galeria">
+            <span class="tag-categoria">Acervo Visual</span>
+            <h2 class="titulo-secao">Galeria Histórica</h2>
+            <p class="texto-paragrafo">Registros fotográficos que retratam a trajetória de Carolina, desde o período em que circulava publicando suas obras até momentos de reconhecimento internacional e visitas oficiais.</p>
+            
+            <div class="galeria-container">
+                <div class="galeria-card">
+                    <img src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcSmsi-wqDehCyDhx2nFqtov0YT6119c005fYlg7l9vcIk6aL76xY6kJ-yAaSjL8l48ZAU2E15xY0MdSDVs" alt="Carolina Maria de Jesus em momento de destaque internacional">
+                    <div class="galeria-legenda">Carolina Maria de Jesus em viagem internacional após o sucesso de Quarto de Despejo.</div>
+                </div>
+                <div class="galeria-card">
+                    <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcS6KMI_Q-Q39orpntIatF_LfqJunWfy9QY1yRChuqejSm6H1EZaGpTjGZ6vgHRDo6u_VqbaoShlw1Zw408" alt="Retrato histórico alusivo ao período de juventude">
+                    <div class="galeria-legenda">A escritora em momento de contemplação, simbolizando sua força e intelectualidade autodidata.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: ANÁLISE LITERÁRIA -->
+        <section class="bloco-artigo" id="analise">
+            <span class="tag-categoria">Análise Crítica</span>
+            <h2 class="titulo-secao">A Estética da Escrevivência</h2>
+            
+            <h3 class="subtitulo-secao">1. A Metáfora Espacial</h3>
+            <p class="texto-paragrafo">A genialidade de <em>Quarto de Despejo</em> começa em seu título. Carolina formula uma tese sociológica profunda usando a arquitetura: se a cidade (os bairros nobres e o centro) é a sala de visitas, onde tudo é polido e exposto, a favela é o "quarto de despejo", o cômodo oculto onde a sociedade esconde aquilo que não quer ver e que considera descartável.</p>
+
+            <h3 class="subtitulo-secao">2. O Estilo e a Norma Padrão</h3>
+            <p class="texto-paragrafo">A escrita de Carolina é marcada por uma mistura fascinante de linguagem coloquial, termos inventados, desvios da norma culta e um vocabulário rebuscado que ela absorvia das leituras de romances clássicos e dicionários encontrados no lixo. Essa "oralidade escrita" não é um defeito literário, mas sim a marca de autenticidade de sua obra. Seus diários são um documento cru que não passou pelo filtro esterilizador da academia.</p>
+
+            <h3 class="subtitulo-secao">3. Literatura de Testemunho</h3>
+            <p class="texto-paragrafo">Diferente de autores modernistas ou realistas que observavam a pobreza de fora (com um olhar burguês), Carolina escreve de dentro. Ela inaugura no Brasil, em larga escala, o que Conceição Evaristo mais tarde batizaria de "escrevivência": a escrita que nasce do corpo que sofre e vivencia a marginalização, trazendo à tona as interseções de raça, classe e gênero.</p>
+        </section>
+
+
+    </main>
+
+    <footer>
+        <p>Dossiê Histórico Literário — Carolina Maria de Jesus (1914–1977)</p>
+        <p style="margin-top: 10px; font-size: 0.85rem;">Desenvolvido Por Fabricio e Yuri, documental e cultural.</p>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const html = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            html.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Modo Claro';
+        }
+
+        toggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            if (current === 'dark') {
+                html.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Modo Escuro';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Modo Claro';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
